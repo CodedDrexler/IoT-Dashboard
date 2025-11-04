@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ESP32 Dashboard</title>
+  
+  <style>
+    * {
+        font-family: 'Open Sans', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .box{
+        background-color: rgb(142, 212, 189);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-inline: .8rem;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+        margin: 20px; 
+
+        min-height: 100vh;
+        }
+    #data { font-size: 1.2em; background: #eee; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>ESP32 - Dashboard (WS)</h1>
+
+  <div class="box">
+    <div class="circle">
+        <h1 id="data">-</h1>
+    </div>
+    <h1 class="sensor">Sensor Ultrasonico</h1>
+    <p>Dados em tempo real</p>
+  </div>
+
+
+  <script>
+    const socket = new WebSocket(`wss://${window.location.host}`);
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      document.getElementById('data').textContent = JSON.stringify(data, null, 2);
+    };
+  </script>
+</body>
+</html>
