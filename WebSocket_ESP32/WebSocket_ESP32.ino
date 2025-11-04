@@ -71,7 +71,7 @@ void setup() {
   webSocket.onEvent(webSocketEvent);
   webSocket.setReconnectInterval(5000);
   webSocket.enableHeartbeat(15000, 3000, 2);
-  // webSocket.setInsecure(); // uncomment if you get SSL errors
+  // webSocket.setInsecure(); // uncomment in case of SSL errors
 }
 
 void loop() {
